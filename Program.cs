@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Service_Center_Management_System.Data;
 
 namespace Service_Center_Management_System
 {
@@ -8,6 +10,9 @@ namespace Service_Center_Management_System
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<ApplicationDbContext>(
+                options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
